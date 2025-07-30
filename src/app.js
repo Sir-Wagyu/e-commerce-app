@@ -4,6 +4,7 @@ const app = express();
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const customerRoutes = require("./routes/customerRoutes");
+const transactionRoutes = require("./routes/transactionRoutes");
 
 app.use(express.json()); // Middleware untuk parsing JSON body
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/customers", customerRoutes);
+app.use("/api/transactions", transactionRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

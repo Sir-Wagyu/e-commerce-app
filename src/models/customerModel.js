@@ -2,8 +2,12 @@ const pool = require("../config/db");
 const { findById, update, getAll } = require("./userModel");
 
 const CustomerModel = {
-   create: async (name, email, address) => {
-      const [result] = await pool.execute("INSERT INTO customers (name, email, address) VALUES (?, ?, ?)", [name, email, address]);
+   create: async (userId, name, email, phone, address) => {
+      // >>> PERBAIKI DI SINI: Sertakan user_id dan phone di SQL INSERT
+      const [result] = await pool.execute(
+         "INSERT INTO customers (user_id, name, email, phone, address) VALUES (?, ?, ?, ?, ?)",
+         [userId, name, email, phone, address]
+      );
       return result.insertId;
    },
 

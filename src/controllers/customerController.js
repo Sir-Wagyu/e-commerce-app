@@ -6,12 +6,14 @@ const CustomerController = {
    createCustomer: async (req, res) => {
       const { userId, name, email, phone, address } = req.body;
 
+      // Tambahkan phone ke validasi jika phone juga wajib
       if (!userId || !name || !email || !address) {
          return res.status(400).json({ message: "User ID, name, email, and address are required" });
       }
 
       try {
-         const customerId = await CustomerModel.create(name, email, address);
+         // >>> PERBAIKI DI SINI: Teruskan userId ke CustomerModel.create
+         const customerId = await CustomerModel.create(userId, name, email, phone, address); // Menambahkan userId, phone
          res.status(201).json({ message: "Customer created successfully", customerId });
       } catch (error) {
          console.error("Error creating customer:", error);

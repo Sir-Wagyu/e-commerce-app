@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
+
 app.use(express.json()); // Middleware untuk parsing JSON body
 
 // Rute untuk setiap modul
@@ -9,6 +12,8 @@ app.use(express.json()); // Middleware untuk parsing JSON body
 app.get("/", (req, res) => {
    res.send("Welcome to the E-commerce API!");
 });
+app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
